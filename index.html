@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section class="principal">
+        <div class="logo">
+            <img src="./img/Vectorlogo.png" alt="">
+        </div>
+        <div class="#">
+            <textarea name="" id="entrada" placeholder="Ingrese el texto aquí" rows="9"></textarea>
+        </div>
+        <div class="botons-container">
+            <div class="info">
+                <span><img src="./img/Vectoricono.png" alt=""> Solo letras minúsculas y sin acentos (en caso sea mayuscula el programa lo devuelve en misnuscula)</span>
+            </div>
+            <div class="botones">
+                <button class="encriptar" id="encriptar"><span>Encriptar</span></button>
+                <button class="desencriptar" id="desencriptar"><span>Desencriptar</span></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="sidebar">
+        <div class="cuadro-no-menu">
+            <div class="muneco"><img src="./img/Muñecomuneco.png" alt=""></div>
+            <div class="no-mensaje"><span>Ningun mensaje fue encontrado</span></div>
+            <div class="ingresa-valor"><p>Ingresa el valor que deseas encriptar o desencriptar</p></div>
+        </div>
+        <div class="texto-encriptado">
+            <textarea spellcheck="false" id="salida" cols="30" rows="10"></textarea>
+            <br>
+            <button class="desencriptar" id="boton-copiar"><span>Copiar</span></button>
+        </div>
+    </section>
+    <script src="./script.js"></script>
+</body>
+</html>
