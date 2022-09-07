@@ -11,13 +11,20 @@ body{
 
     background: #333;
 }
-.button-efect span{
-    transition: all .5s ease-in-out;
+
+/* DAR EFECTO A TODOS LO BOTONOES CON LA CLASE BUTTON-EFECT */
+.button-efect span, .button-efect{
+    transition: all .2s ease-in-out;
 }
 .button-efect:hover span{
-    font-size: 1.2rem;
-    transform: translateY(200px);
+    font-size: 1.1rem;
 }
+.button-efect:hover{
+    transform: translateY(-5px);
+    /* margin-bottom: 50px; */
+}
+
+/* ********************************************************* */
 .principal{
     width: 66%;
     /* height: 95vh; */
@@ -126,7 +133,7 @@ body{
 
 
 .sidebar{
-    background: #555;
+    background: #666;
     width: 33%;
     height: 90vh;
 
