@@ -69,23 +69,25 @@ function obtenerTextoEncriptado(){
     if(valorEntrada != ""){
         mostrarElemento(textoEncriptado);
         ocultarElemento(noMenu);
+        document.querySelector(".sidebar").style.backgroundColor = '#eee';
     }
     var entradaEncriptada = encriptarMensaje(valorEntrada);
     salidaTexto.value = entradaEncriptada;
+    entrada.value = "";
 }
 function obtenerTextoDesencriptado(){
     var valorEntrada = entrada.value;
     if(valorEntrada != ""){
         mostrarElemento(textoEncriptado);
         ocultarElemento(noMenu);
+        document.querySelector(".sidebar").style.backgroundColor = '#eee';
     }
     var entradaDesencriptada = desencriptarMensaje(valorEntrada);
     salidaTexto.value = entradaDesencriptada;
+    entrada.value = "";
 }
 function copiarPortaPapeles() {
-
     var contenido = document.getElementById('salida');
-    
     contenido.select();//selecciona todo el valor del elemento
     document.execCommand("copy");//copia todos los elementos seleccionados
 }
