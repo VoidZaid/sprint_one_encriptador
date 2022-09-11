@@ -12,36 +12,49 @@
 </head>
 <body>
     <!-- parte principal, cuerpo del protecto, incluye los botones de encriptar y desencriptar -->
-    <section class="principal">
-        <div class="logo">
-            <img src="./img/Vectorlogo.png" alt="">
-        </div>
-        <div class="#">
-            <textarea name="" id="entrada" placeholder="Ingrese el texto aquí" rows="9"></textarea>
-        </div>
-        <div class="botons-container">
-            <div class="info">
-                <span><img src="./img/Vectoricono.png" alt=""> Solo letras minúsculas y sin acentos (en caso sea mayuscula el programa lo devuelve en misnuscula)</span>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="./img/Vectorlogo.png" alt="">
             </div>
-            <div class="botones">
-                <button class="encriptar button-efect" id="encriptar"><span>Encriptar</span></button>
-                <button class="desencriptar button-efect" id="desencriptar"><span>Desencriptar</span></button>
+            <ul>
+                <a href=""><li>Encriptador</li></a>
+                <a href=""><li>Ahorcado</li></a>
+                
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="principal">
+            <div class="#">
+                <textarea name="" id="entrada" placeholder="Ingrese el texto aquí" rows="9"></textarea>
             </div>
-        </div>
-    </section>
-    <!-- parte del SIDEBAR, OUTPUT DE TEXTO ENCRIPTADO -->
-    <section class="sidebar">
-        <div class="cuadro-no-menu">
-            <div class="muneco"><img src="./img/Muñecomuneco.png" alt=""></div>
-            <div class="no-mensaje"><span>Ningun mensaje fue encontrado</span></div>
-            <div class="ingresa-valor"><p>Ingresa el valor que deseas encriptar o desencriptar</p></div>
-        </div>
-        <div class="texto-encriptado">
-            <textarea spellcheck="false" id="salida" cols="30" rows="10"></textarea>
-            <br>
-            <button class="encriptar button-efect" id="boton-copiar"><span>Copiar</span></button>
-        </div>
-    </section>
+            <div class="botons-container">
+                <div class="info">
+                    <span><img src="./img/Vectoricono.png" alt=""> Solo letras minúsculas y sin acentos (en caso sea mayuscula el programa lo devuelve en misnuscula)</span>
+                </div>
+                <div class="botones">
+                    <button class="encriptar button-efect" id="encriptar"><span>Encriptar</span></button>
+                    <button class="desencriptar button-efect" id="desencriptar"><span>Desencriptar</span></button>
+                </div>
+            </div>
+        </section>
+        <!-- parte del SIDEBAR, OUTPUT DE TEXTO ENCRIPTADO -->
+        <section class="sidebar">
+            <div class="cuadro-no-menu">
+                <div class="muneco"><img src="./img/Muñecomuneco.png" alt=""></div>
+                <div class="no-mensaje"><span>Ningun mensaje fue encontrado</span></div>
+                <div class="ingresa-valor"><p>Ingresa el valor que deseas encriptar o desencriptar</p></div>
+            </div>
+            <div class="texto-encriptado">
+                <textarea spellcheck="false" id="salida" rows="10"></textarea>
+                <br>
+                <button class="encriptar button-efect" id="boton-copiar"><span>Copiar</span></button>
+            </div>
+        </section>
+    </main>
+
     <script src="./script.js"></script>
 </body>
 </html>
