@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VZ | Ahorcado</title>
+    <!-- Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/ahorcado.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="./img/Vectorlogo.png" alt="">
+            </div>
+            <ul id="anchors-proyects">
+                <a href="./index.html"><li>Encriptador</li></a>
+                <a href="./ahorcado.html"><li>Ahorcado</li></a>
+                
+            </ul>
+            <span id="button-menu" class="material-symbols-outlined button">
+                menu
+            </span>
+        </nav>
+    </header>
+
+
+<!-- ********************************************************************** -->
+    <!-- PARTE DE LA PAGINA PERSONALIZADA SIN ESTILOS RECICLADOS -->
+    <!-- PRIMER MENU, BOTONES DE AGREGAR PALABRAS E INICIAR JUEGO -->
+    <main class="main-ahorcado">
+        <section class="buttons-add-start" id="buttons-add-start">
+            <button class="button button-efect button-start-game" id="start-game"><span>Iniciar juego</span></button>
+            <button class="button button-efect button-add-words" id="add-new-words"><span>Agregar nueva palabra</span></button>
+        </section>
+
+
+        <!-- PARA AGREGAR EVENTOS VOLVEMOS EL SECTION CONTENT-EDITABLE -->
+        <section class="menu-start-game" contenteditable="true" autofocus>
+            <canvas id="canvas" width="1000" height="400"></canvas>
+            <div class="buttons-game-container">
+                <button contenteditable="false" class="button button-efect button-new-game" id="new-game"><span>Nuevo juego</span></button>
+                <button contenteditable="false" class="button button-efect button-desist" id="button-desist"><span>Desistir</span></button>
+            </div>
+        </section>
+
+
+
+        <section class="menu-add-words">
+            <div class="container-default-words">
+                <!-- agregar lista palabras x defecto - guardadas -->
+            </div>
+            <div class="container-input-word">
+                <input maxlength="25" spellcheck="false" type="text" class="input-word" placeholder="Ingresa la nueva palabra que quieres agregar">
+            </div>
+            <div>
+                <button class="button button-efect button-save-word"><span>Guardar y empezar</span></button>
+                <button class="button button-efect button-cancel" id="btn-cancel"><span>Cancelar</span></button>
+            </div>
+        </section>
+
+    </main>
+
+
+<!-- ******************************************************************* -->
+<!-- ENLACES DE JAVASCRIPT -->
+<!-- <script src="./js/menu_responsive.js"></script> -->
+<script src="./js/ahorcado/views_controller.js"></script>
+<script src="./js/ahorcado/canvas.js"></script>
+</body>
+</html>
