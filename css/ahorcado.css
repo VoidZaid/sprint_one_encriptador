@@ -1,0 +1,114 @@
+.main-ahorcado{
+    align-items: center;
+    /* margin: auto; */
+    justify-content: center;
+}
+/* ************* PRIMER MENU - BTN SELECION DE CASILLAS***********/
+.buttons-add-start{
+    display: auto;
+}
+.button-start-game,.button-add-words{
+    display: block;
+    margin: 0 auto;
+    /* box-sizing: border-box; */
+    font-size: var(--btnFont);
+
+}
+.button-start-game{
+    width: 250px;
+    height: 80px;
+    margin: 0 auto 50px;
+    padding: px px;
+    background-color: var(--colorBotonOscuro);
+}
+.button-start-game span{
+    color: var(--colorTextoBotonOscuro);
+}
+.button-add-words{
+    height:70px;
+    margin: 0 auto 120px;
+    padding: 20px 5px;
+}
+.button-add-words span{
+    color: var(--colorBackground);
+    font-weight: bold;
+}
+
+/* ********** SEGUNDO MENU - AGREGAR NUEVAS PALABRAS*********** */
+.menu-add-words{
+    display: none;
+    margin: 0 auto 0;
+}
+.input-word{
+    width: 90%;
+    margin: 0 auto 200px;
+    padding: 10px 0 0;
+    border-width: 0 0 1px 0;
+    outline: none;
+    
+    font-size: 2rem;
+    text-align: center;
+    color: var(--colorTextoBotonOscuro);
+    background-color: inherit;
+}
+.input-word::placeholder{
+    font-size: var(--btnFont);
+    text-align: center;
+}
+.button-save-word, .button-cancel{
+    width: 200px;
+    height: 50px;
+    margin: 0 4px;
+    
+    font-size: var(--btnFont);
+}
+.button-save-word{
+    background-color: var(--colorBotonOscuro);
+    color: var(--colorTextoBotonOscuro);
+}
+
+/* ********** TERCER MENU - MENU DE JUEGO DE AHORCADO*********** */
+.menu-start-game{
+    display: none;
+    cursor: pointer;
+    outline: none;
+}
+.buttons-game-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    margin: 80px 0 0 0;
+
+    gap: 40px;
+}
+.buttons-game-container button{
+    width: 250px;
+    height: 50px;
+    font-size: 1rem;
+}
+.button-new-game{
+    background-color: var(--colorBotonOscuro);
+    color: var(--colorTextoBotonOscuro);
+}
+.button-desist{
+    background-color: var(--colorBotonClaro);
+    color: var(--colorTextoBotonClaro);
+    font-weight: bold;
+}
+
+
+@media(max-width: 992px){
+    
+}
+@media(max-width: 820px){
+    body{
+        margin: 0 auto;
+    }
+    .main-ahorcado{
+        display: flex;
+        align-items: center;
+        height: 80vh;
+    }
+}
+
