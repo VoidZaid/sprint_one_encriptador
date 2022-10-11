@@ -7,6 +7,7 @@
     <title>VZ | Ahorcado</title>
     <!-- Material Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
@@ -58,12 +59,13 @@
                 <!-- agregar lista palabras x defecto - guardadas -->
             </div>
             <div class="container-input-word">
-                <input maxlength="25" spellcheck="false" type="text" class="input-word" placeholder="Ingresa la nueva palabra que quieres agregar">
+                <input maxlength="25" spellcheck="false" type="text" class="input-word" id="input-word" placeholder="Ingresa la nueva palabra que quieres agregar" autofocus>
+                <div class="btns-add-words">
+                    <button class="button button-efect button-save-word" id="btn-save-word"><span>Agregar</span></button>
+                    <button class="button button-efect button-cancel" id="btn-cancel"><span>Volver</span></button>
+                </div>
             </div>
-            <div>
-                <button class="button button-efect button-save-word"><span>Guardar y empezar</span></button>
-                <button class="button button-efect button-cancel" id="btn-cancel"><span>Cancelar</span></button>
-            </div>
+            
         </section>
 
     </main>
@@ -74,5 +76,6 @@
 <!-- <script src="./js/menu_responsive.js"></script> -->
 <script src="./js/ahorcado/views_controller.js"></script>
 <script src="./js/ahorcado/canvas.js"></script>
+<script src="./js/ahorcado/words.js"></script>
 </body>
 </html>

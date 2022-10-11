@@ -13,10 +13,12 @@ let container_input_word = document.querySelector('.menu-add-words');
 button_add_words.addEventListener("click",function(){
     buttons_add_start.style.display = "none";
     container_input_word.style.display = "block"
+    // let inputNewWord = document.getElementById('input-word');
+    inputWord.focus();
 });
 button_start_game.addEventListener('click', function(){
     buttons_add_start.style.display = "none";
-    menu_start_game.style.display = "block"
+    menu_start_game.style.display = "flex"
     menu_start_game.focus();
 });
 btn_cancel.addEventListener('click', function(){
