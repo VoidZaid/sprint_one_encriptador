@@ -31,11 +31,12 @@ body{
 .button-efect span, .button-efect{
     transition: all .2s ease-in-out;
 }
-.button-efect:hover span{
-    font-size: 1.2rem;
+.button-efect{
+    box-shadow: 2px 2px 6px 0 var(--colorTextoBotonClaro) inset;
 }
 .button-efect:hover{
     transform: translateY(-5px);
+    box-shadow: 2px 2px 6px 0 var(--colorSidebar) inset, 2px 2px 6px 0;
 }
 .button{
     /* width: 200px;
@@ -82,6 +83,8 @@ nav li:hover{
     font-weight: bold;
     color: var(--colorTextoBotonClaro);
     background-color: var(--colorBotonClaro);
+    box-shadow: 3px 3px 1px 0 var(--colorSidebar)
+    ,6px 6px 1px 0 var(--colorShadow);
 }
 /* ************BOTON DE MENU RESPONSIVE ********* */
 nav .material-symbols-outlined.button{

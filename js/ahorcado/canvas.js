@@ -1,47 +1,47 @@
-// let array_words = ["ORACLE", "ONE", "ALURA", "JAVASCRIPT", "CSS"];
-let array_words = ["ALURA", "JAVASCRIPT", "CSS"];
+let array_words = ["ORACLE", "ALURA", "JAVASCRIPT"];
+// let array_words = ["ALURA", "JAVASCRIPT", "CSS"];
 let secret_word= getRandomWord(array_words);
 
 let canvas = document.querySelector('#canvas');
 let brush = canvas.getContext("2d");
 let btn_new_game = document.getElementById('new-game');
 
+// ***************************************************************
 function getRandomWord(arr){
     let arr_len= Math.floor(Math.random()*arr.length);
     return arr[arr_len];
 };
-
-
 function changeStrokeStyle(colorStroke){
     brush.strokeStyle = colorStroke;
-}
+};
 function changeLineWidth(lineWidth = 4){
     brush.lineWidth = lineWidth;
-}
+};
 function changeFillColor(color = "#333"){
     brush.fillStyle = color;
-}
+};
 function drawRectangle(axisX,axisY,x,y){
     brush.fillRect(axisX,axisY,x,y);
-}
+};
 function drawCircle(axisX,axisY,radio){
     brush.beginPath();
     brush.arc(axisX,axisY,radio,0,2*Math.PI);
     brush.stroke();
     brush.closePath();
-}
+};
 function drawLine(axisX,axisY,x,y){
     brush.beginPath();
     brush.moveTo(axisX,axisY);
     brush.lineTo(x,y);
     brush.stroke();
     brush.closePath();
-}
+};
 function drawLetters(axisX,axisY,text,fontSize,color = "#aaa"){
-    brush.font = fontSize+"px Arial";
+    brush.textAlign = "center";
+    brush.font = fontSize+"px Helvetica";
     brush.fillStyle = color;
     brush.fillText(text,axisX,axisY);
-}
+};
 function drawHangmanCanvas(){
     // ESTILOS DE LA LINEA, TRAZOS Y VERTICES REDONDEADOS
     brush.lineWidth = 8;
@@ -61,7 +61,7 @@ function drawHangmanCanvas(){
     brush.lineTo(540,75);
     brush.stroke();
     brush.closePath();
-}
+};
 function drawUnderlinesLetters(axisX,axisY,longLine=0, colorStroke="#333"){
     brush.lineWidth = 4;
     brush.strokeStyle = colorStroke;
@@ -70,7 +70,7 @@ function drawUnderlinesLetters(axisX,axisY,longLine=0, colorStroke="#333"){
     brush.lineTo(axisX+longLine,axisY);
     brush.stroke();
     brush.closePath();
-}
+};
 function keyValidation(keyCode){
     // console.log(keyCode);
     let valSpecialChar = keyCode==192? 209: keyCode;
@@ -85,13 +85,11 @@ function keyValidation(keyCode){
 }
 function drawSpaceWord(){
     let colorStroke;
-    let widthLineWord = 50;
+    let widthLineWord = 40;
     let widthSpace = 10;
     let calcMiddle = 1000/2-(secret_word.length*(widthLineWord+widthSpace)-widthSpace)/2;
     drawHangmanCanvas();
-    drawLetters(620,130,"INTENTOS",20,"darkcyan");
-    drawLetters(620,155,"RESTANTES:",20,"darkcyan");
-    drawLetters(750,155,"4",60,"darkcyan");
+    drawLetters(500,30,"Intentos restantes: 6",20,"darkcyan");
     console.log(secret_word);
     for(let i=0; i < secret_word.length; i++){
         secret_word[i]==" "? colorStroke="#333": colorStroke ="#aaa";//spacios en blanco
@@ -99,12 +97,40 @@ function drawSpaceWord(){
         calcMiddle= calcMiddle+widthSpace+widthLineWord;
     }
 }
+function valSpacesCont(){
+    if(secret_word.includes(" ")){
+        let contSpace = 0;
+        for(let i = 0; i < secret_word.length; i++) {
+            if(secret_word[i]==" "){
+                contSpace++;
+            }
+        }
+        console.log(contSpace);
+        return contSpace;
+    }
+    return 0;
+}
+function restart(){
+    secret_word= getRandomWord(array_words);
+    calcMiddle = 1000/2-(secret_word.length*widthLineWord)/2;
+    arrFails = [];
+    arrPressed = [];
+    contWritedLetters = valSpacesCont();
+    // contWritedLetters = 0;
+    calcMiddleFails = 0;
+    brush.clearRect(0,0,canvas.width,canvas.height);
+    drawSpaceWord();
+    menu_start_game.addEventListener("keydown",funcTT);
+}
+
+// ********************************************************************
+// ********************************************************************
 
 let arrFails = [];
 let arrPressed = [];//capramos las letras ya dibujadas
-let contWritedLetters = 0;
+let contWritedLetters = valSpacesCont();
 //variables recicladas de drawSpaceWord
-let widthLineWord = 60;
+let widthLineWord = 50;
 let calcMiddle = 1000/2-(secret_word.length*widthLineWord)/2;
 let calcMiddleFails;
 
@@ -112,17 +138,19 @@ function funcTT(e){
     let charConverted = keyValidation(e.keyCode);
     if(!arrPressed.includes(charConverted) && secret_word.includes(charConverted)){//calidamos letras ya dibujadas y que sean parte de la palabra secreta
         arrPressed.push(charConverted);
-        console.log(arrPressed);
+        // console.log(arrPressed);
         for (let i = 0; i < secret_word.length; i++) {
-            secret_word[i]==" "?i++:"";
+            if(secret_word[i]==" "){
+                i++;
+            }
             if(secret_word[i]==charConverted ){
-                drawLetters(10+calcMiddle+(widthLineWord*i),340,charConverted,55);
+                drawLetters(24+calcMiddle+(widthLineWord*i),340,charConverted,widthLineWord-10);
                 contWritedLetters++;//se contara la letra cuantas veces sea dibujado
-                console.log(contWritedLetters);
+                // console.log(contWritedLetters);
                 if(secret_word.length==contWritedLetters){
-                    brush.clearRect(620,110,200,100);
-                    drawLetters(620,120,"FELICIDADES!!!",30,"darkcyan");
-                    drawLetters(620,155,"HAS GANADO",23,"darkcyan");
+                    brush.clearRect(400,10,300,20);
+                    drawLetters(500,150,"FELICIDADES!!!",25,"darkcyan");
+                    drawLetters(500,185,"¡Has ganado!",20,"darkcyan");
                     menu_start_game.removeEventListener("keydown",funcTT);
                     btn_new_game.removeEventListener("keydown",funcTT);
                 }
@@ -153,27 +181,37 @@ function funcTT(e){
             changeLineWidth(2);
             drawCircle(540,98,20);
             
-            brush.clearRect(750,105,50,50);
-            drawLetters(750,155,"3",60,"darkcyan");
+            brush.clearRect(575,10,50,50);
+            drawLetters(585,30,"5",20,"darkcyan");
         }else if(arrFails.length == 2){
             drawLine(540,118,540,190);
 
-            brush.clearRect(750,105,50,50);
-            drawLetters(750,155,"2",60,"darkcyan");
+            brush.clearRect(575,10,50,50);
+            drawLetters(585,30,"4",20,"darkcyan");
+
         }else if(arrFails.length == 3){
             drawLine(540,120,515,150);
+            
+            brush.clearRect(575,10,50,50);
+            drawLetters(585,30,"3",20,"darkcyan");
+        }else if(arrFails.length == 4){
             drawLine(540,120,565,150);
             
-            brush.clearRect(750,105,50,50);
-            drawLetters(750,155,"1",60,"darkcyan");
-        }else if(arrFails.length == 4){
+            brush.clearRect(575,10,50,50);
+            drawLetters(585,30,"2",20,"darkcyan");
+        }else if(arrFails.length == 5){
+            // drawLine(540,120,565,150);
             drawLine(540,190,515,220);
+            
+            brush.clearRect(575,10,50,50);
+            drawLetters(585,30,"1",20,"darkcyan");
+        }else if(arrFails.length == 6){
             drawLine(540,190,565,220);
             
-            brush.clearRect(620,110,200,100);
-            drawLetters(620,120,"PERDISTE!!!",30,"darkcyan");
-            drawLetters(620,155,"HAS FALLADO TODOS",23,"darkcyan");
-            drawLetters(620,185,"TUS INTENTOS",23,"darkcyan");
+            brush.clearRect(400,10,300,20);
+            drawLetters(500,130,"PERDISTE!!!",25,"#c6572a");
+            drawLetters(500,165,"Has fallado todos",20,"#c6572a");
+            drawLetters(500,195,"tus intentos",20,"#c6572a");
             // REMOVEMOS EL EVENTO Y AVISAMOS QUE USO TODOS LOS INTENTOS
             menu_start_game.removeEventListener("keydown",funcTT);
             btn_new_game.removeEventListener("keydown",funcTT);
@@ -181,17 +219,6 @@ function funcTT(e){
     }
 }
 
-function restart(){
-    secret_word= getRandomWord(array_words);
-    calcMiddle = 1000/2-(secret_word.length*widthLineWord)/2;
-    arrFails = [];
-    arrPressed = [];
-    contWritedLetters = 0;
-    calcMiddleFails = 0;
-    brush.clearRect(0,0,canvas.width,canvas.height);
-    drawSpaceWord();
-    menu_start_game.addEventListener("keydown",funcTT);
-}
 drawSpaceWord();
 menu_start_game.addEventListener("keydown",funcTT);
 button_start_game.addEventListener("click", restart);

@@ -1,7 +1,8 @@
 .main-ahorcado{
+    height: 89vh;
     align-items: center;
-    /* margin: auto; */
     justify-content: center;
+    overflow: hidden;
 }
 /* ************* PRIMER MENU - BTN SELECION DE CASILLAS***********/
 .buttons-add-start{
@@ -38,10 +39,52 @@
 .menu-add-words{
     display: none;
     margin: 0 auto 0;
+    width: 500px;
+    height: 80vh;
+}
+.container-default-words{
+    display: flex;
+    justify-content: center;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    min-height: 30vh;
+    gap: 17px;
+}
+.container-default-words p{
+    margin: 0;
+}
+.word-element{
+    padding: 4px 30px 4px 8px;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px 2px var(--colorShadow);
+
+    font-size: 1.2rem;
+    cursor: default;
+
+    color: var(--colorTextoBotonOscuro);
+    background-color: var(--colorBotonOscuro);
+    
+}
+.word-element-icon{
+    position: absolute;
+    right: 0;
+
+    cursor: pointer;
+    font-size: 1.7rem;
+    color: teal;
+}
+
+.container-input-word{
+    display: flex;
+    flex-wrap: wrap;
+    height: 50vh;
+    align-content: space-around;
+    justify-content: center;
 }
 .input-word{
     width: 90%;
-    margin: 0 auto 200px;
+    margin: 0 auto 50px;
     padding: 10px 0 0;
     border-width: 0 0 1px 0;
     outline: none;
@@ -67,18 +110,22 @@
     color: var(--colorTextoBotonOscuro);
 }
 
+
 /* ********** TERCER MENU - MENU DE JUEGO DE AHORCADO*********** */
 .menu-start-game{
     display: none;
+    align-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
     cursor: pointer;
     outline: none;
+    height: inherit;
 }
 .buttons-game-container{
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
-    margin: 80px 0 0 0;
+    width: 100%;
 
     gap: 40px;
 }
@@ -97,9 +144,18 @@
     font-weight: bold;
 }
 
+#canvas{
+    width: 1000px;
+    margin: 0 auto;
+}
+
+
 
 @media(max-width: 992px){
-    
+    #canvas{
+        width: 1100px;
+        margin: 0 auto;
+    }
 }
 @media(max-width: 820px){
     body{
@@ -108,7 +164,30 @@
     .main-ahorcado{
         display: flex;
         align-items: center;
-        height: 80vh;
+    }
+    #canvas{
+        width: 1100px;
+        /* width: 100%; */
+    }
+}
+@media (max-width: 768px) {
+    .buttons-game-container{
+        gap: 15px;
+    }
+    .buttons-game-container button{
+        width: 200px;
+        height: 50px;
+        font-size: 1rem;
+    }
+    #canvas{
+        width: 1000px;
+    }
+    .btns-add-words{
+        width: 60%;
+    }
+    .button-save-word, .button-cancel{
+        width: 100%;
+        margin-top: 20px;
     }
 }
 
