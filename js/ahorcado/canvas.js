@@ -1,7 +1,6 @@
 let array_words = ["ORACLE", "ALURA", "JAVASCRIPT"];
 // let array_words = ["PIRATAS DEL CARIBE"];
 let secret_word= getRandomWord(array_words);
-
 let canvas = document.querySelector('#canvas');
 let brush = canvas.getContext("2d");
 let btn_new_game = document.getElementById('new-game');
@@ -83,7 +82,7 @@ function keyValidation(keyCode){
     }
     return null;
 }
-function drawSpaceWord(viewport=1200){
+function drawSpaceWord(){
     let winWidth = window.innerWidth;
     let colorStroke, calcMiddle, lineWidth;
     let widthLineWord = 35;
@@ -142,23 +141,64 @@ function restart(){
     calcMiddleFails = 0;
     brush.clearRect(0,0,canvas.width,canvas.height);
     drawSpaceWord();
-    menu_start_game.addEventListener("keydown",funcTT);
+
+    
+    // menu_start_game.addEventListener("keydown",funcTT);
+    window.addEventListener("keydown",funcTT);
+}
+function drawFailHangman(arrFails){
+    // HACEMOS QUE AVANCE EL DIBUJO DEL AHORCADO
+    if(arrFails.length == 1){
+        changeLineWidth(2);
+        drawLine(535,108,545,108);
+        changeLineWidth(1);
+        drawLine(530,92,536,98);
+        drawLine(536,92,530,98);
+        drawLine(544,92,550,98);
+        drawLine(550,92,544,98);
+        changeLineWidth(2);
+        drawCircle(540,98,20);
+        
+        brush.clearRect(575,10,50,50);
+        drawLetters(585,30,"5",20,"darkcyan");
+    }else if(arrFails.length == 2){
+        drawLine(540,118,540,190);
+
+        brush.clearRect(575,10,50,50);
+        drawLetters(585,30,"4",20,"darkcyan");
+
+    }else if(arrFails.length == 3){
+        drawLine(540,120,515,150);
+        
+        brush.clearRect(575,10,50,50);
+        drawLetters(585,30,"3",20,"darkcyan");
+    }else if(arrFails.length == 4){
+        drawLine(540,120,565,150);
+        
+        brush.clearRect(575,10,50,50);
+        drawLetters(585,30,"2",20,"darkcyan");
+    }else if(arrFails.length == 5){
+        // drawLine(540,120,565,150);
+        drawLine(540,190,515,220);
+        
+        brush.clearRect(575,10,50,50);
+        drawLetters(585,30,"1",20,"darkcyan");
+    }else if(arrFails.length == 6){
+        drawLine(540,190,565,220);
+        
+        brush.clearRect(400,10,300,20);
+        drawLetters(500,130,"PERDISTE!!!",25,"#c6572a");
+        drawLetters(500,165,"Has fallado todos",20,"#c6572a");
+        drawLetters(500,195,"tus intentos",20,"#c6572a");
+        // REMOVEMOS EL EVENTO Y AVISAMOS QUE USO TODOS LOS INTENTOS
+        // menu_start_game.removeEventListener("keydown",funcTT);
+        // btn_new_game.removeEventListener("keydown",funcTT);
+        window.removeEventListener("keydown",funcTT);
+    }
 }
 
 // ********************************************************************
 // ********************************************************************
-
-let arrFails = [];
-let arrPressed = [];//caparamos las letras ya dibujadas
-let contWritedLetters = valSpacesCont();
-//variables recicladas de drawSpaceWord
-let widthLineWord;
-// let calcMiddle = 1000/2-(secret_word.length*widthLineWord)/2;
-let calcMiddle;
-let calcMiddleFails;
-let winWidth;
-
-
 
 
 function funcTT(e){
@@ -200,8 +240,11 @@ function funcTT(e){
                     brush.clearRect(400,10,300,20);
                     drawLetters(500,150,"FELICIDADES!!!",25,"darkcyan");
                     drawLetters(500,185,"¡Has ganado!",20,"darkcyan");
-                    menu_start_game.removeEventListener("keydown",funcTT);
-                    btn_new_game.removeEventListener("keydown",funcTT);
+
+
+                    // menu_start_game.removeEventListener("keydown",funcTT);
+                    // btn_new_game.removeEventListener("keydown",funcTT);
+                    window.removeEventListener("keydown",funcTT);
                 }
             }
         }
@@ -232,58 +275,22 @@ function funcTT(e){
             calcMiddleFails = calcMiddleFails + widthLineFails;
             drawLetters(calcMiddleFails+(widthLineFails*i)-widthLineFails,390,arrFails[i],fontS);
         }
-        // HACEMOS QUE AVANCE EL DIBUJO DEL AHORCADO
-        if(arrFails.length == 1){
-            changeLineWidth(2);
-            drawLine(535,108,545,108);
-            changeLineWidth(1);
-            drawLine(530,92,536,98);
-            drawLine(536,92,530,98);
-            drawLine(544,92,550,98);
-            drawLine(550,92,544,98);
-            changeLineWidth(2);
-            drawCircle(540,98,20);
-            
-            brush.clearRect(575,10,50,50);
-            drawLetters(585,30,"5",20,"darkcyan");
-        }else if(arrFails.length == 2){
-            drawLine(540,118,540,190);
-
-            brush.clearRect(575,10,50,50);
-            drawLetters(585,30,"4",20,"darkcyan");
-
-        }else if(arrFails.length == 3){
-            drawLine(540,120,515,150);
-            
-            brush.clearRect(575,10,50,50);
-            drawLetters(585,30,"3",20,"darkcyan");
-        }else if(arrFails.length == 4){
-            drawLine(540,120,565,150);
-            
-            brush.clearRect(575,10,50,50);
-            drawLetters(585,30,"2",20,"darkcyan");
-        }else if(arrFails.length == 5){
-            // drawLine(540,120,565,150);
-            drawLine(540,190,515,220);
-            
-            brush.clearRect(575,10,50,50);
-            drawLetters(585,30,"1",20,"darkcyan");
-        }else if(arrFails.length == 6){
-            drawLine(540,190,565,220);
-            
-            brush.clearRect(400,10,300,20);
-            drawLetters(500,130,"PERDISTE!!!",25,"#c6572a");
-            drawLetters(500,165,"Has fallado todos",20,"#c6572a");
-            drawLetters(500,195,"tus intentos",20,"#c6572a");
-            // REMOVEMOS EL EVENTO Y AVISAMOS QUE USO TODOS LOS INTENTOS
-            menu_start_game.removeEventListener("keydown",funcTT);
-            btn_new_game.removeEventListener("keydown",funcTT);
-        }
+        drawFailHangman(arrFails);
     }
 }
+let arrFails = [];
+let arrPressed = [];//caparamos las letras ya dibujadas
+let contWritedLetters = valSpacesCont();
+//variables recicladas de drawSpaceWord
+let widthLineWord;
+// let calcMiddle = 1000/2-(secret_word.length*widthLineWord)/2;
+let calcMiddle;
+let calcMiddleFails;
+let winWidth;
 
 drawSpaceWord();
-menu_start_game.addEventListener("keydown",funcTT);
+// menu_start_game.addEventListener("keydown",funcTT);
+window.addEventListener("keydown",funcTT);
 button_start_game.addEventListener("click", restart);
 btn_new_game.addEventListener("click", restart);
 window.addEventListener("resize", getWinWidth);
