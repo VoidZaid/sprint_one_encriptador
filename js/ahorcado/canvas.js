@@ -1,5 +1,5 @@
 let array_words = ["ORACLE", "ALURA", "JAVASCRIPT"];
-// let array_words = ["ALURA", "JAVASCRIPT", "CSS"];
+// let array_words = ["PIRATAS DEL CARIBE"];
 let secret_word= getRandomWord(array_words);
 
 let canvas = document.querySelector('#canvas');
@@ -62,8 +62,8 @@ function drawHangmanCanvas(){
     brush.stroke();
     brush.closePath();
 };
-function drawUnderlinesLetters(axisX,axisY,longLine=0, colorStroke="#333"){
-    brush.lineWidth = 4;
+function drawUnderlinesLetters(axisX,axisY,longLine=0, colorStroke="#333",lineWidth = 4){
+    brush.lineWidth = lineWidth;
     brush.strokeStyle = colorStroke;
     brush.beginPath();
     brush.moveTo(axisX,axisY);
@@ -83,17 +83,34 @@ function keyValidation(keyCode){
     }
     return null;
 }
-function drawSpaceWord(){
-    let colorStroke;
-    let widthLineWord = 40;
-    let widthSpace = 10;
-    let calcMiddle = 1000/2-(secret_word.length*(widthLineWord+widthSpace)-widthSpace)/2;
+function drawSpaceWord(viewport=1200){
+    let winWidth = window.innerWidth;
+    let colorStroke, calcMiddle, lineWidth;
+    let widthLineWord = 35;
+    let widthSpace = 9;
+    
+    if (winWidth<=992&& winWidth>=768){
+        widthLineWord = 30;
+        widthSpace = 8;
+        lineWidth = 3;
+    }else if(winWidth <= 768 && winWidth>=576){
+        widthLineWord = 23;
+        widthSpace = 6;
+        lineWidth = 3;
+    }else if(winWidth <=576){
+        widthLineWord = 18;
+        widthSpace = 4;
+        lineWidth = 2;
+    }
+    calcMiddle = 1000/2-(secret_word.length*(widthLineWord+widthSpace)-widthSpace)/2;
+    // let calcMiddle = 1000/2-(secret_word.length*widthLineWord)/2;
+
     drawHangmanCanvas();
     drawLetters(500,30,"Intentos restantes: 6",20,"darkcyan");
     console.log(secret_word);
     for(let i=0; i < secret_word.length; i++){
         secret_word[i]==" "? colorStroke="#333": colorStroke ="#aaa";//spacios en blanco
-        drawUnderlinesLetters(calcMiddle, 350, widthLineWord, colorStroke);
+        drawUnderlinesLetters(calcMiddle, 350, widthLineWord, colorStroke,lineWidth);
         calcMiddle= calcMiddle+widthSpace+widthLineWord;
     }
 }
@@ -105,14 +122,19 @@ function valSpacesCont(){
                 contSpace++;
             }
         }
-        console.log(contSpace);
+        // console.log(contSpace);
         return contSpace;
     }
     return 0;
 }
+function getWinWidth(){
+    winWidth = window.innerWidth;
+    // console.log(winWidth)
+}
 function restart(){
     secret_word= getRandomWord(array_words);
-    calcMiddle = 1000/2-(secret_word.length*widthLineWord)/2;
+    // calcMiddle = 1000/2-(secret_word.length*widthLineWord)/2;
+    calcMiddle = 1000/2-((secret_word.length*widthLineWord)-widthLineWord)/2;
     arrFails = [];
     arrPressed = [];
     contWritedLetters = valSpacesCont();
@@ -127,12 +149,17 @@ function restart(){
 // ********************************************************************
 
 let arrFails = [];
-let arrPressed = [];//capramos las letras ya dibujadas
+let arrPressed = [];//caparamos las letras ya dibujadas
 let contWritedLetters = valSpacesCont();
 //variables recicladas de drawSpaceWord
-let widthLineWord = 50;
-let calcMiddle = 1000/2-(secret_word.length*widthLineWord)/2;
+let widthLineWord;
+// let calcMiddle = 1000/2-(secret_word.length*widthLineWord)/2;
+let calcMiddle;
 let calcMiddleFails;
+let winWidth;
+
+
+
 
 function funcTT(e){
     let charConverted = keyValidation(e.keyCode);
@@ -140,11 +167,33 @@ function funcTT(e){
         arrPressed.push(charConverted);
         // console.log(arrPressed);
         for (let i = 0; i < secret_word.length; i++) {
+            
             if(secret_word[i]==" "){
                 i++;
             }
             if(secret_word[i]==charConverted ){
-                drawLetters(24+calcMiddle+(widthLineWord*i),340,charConverted,widthLineWord-10);
+                let rest, y;
+                // acomodamos el codigo segun el ancho del navegador para dibujar las letras
+                if (winWidth>=768 && winWidth<=992 ){
+                    widthLineWord = 38;
+                    rest = 8;
+                    y = 345;
+                }else if( winWidth>=576 && winWidth <= 768){
+                    widthLineWord = 29;
+                    rest = 5;
+                    y = 345;
+                }else if(winWidth <=576){
+                    widthLineWord = 22;
+                    rest = 2;
+                    y = 345;
+                }else{
+                    widthLineWord = 45;
+                    rest = 10;
+                    y = 342;
+                }
+                calcMiddle = 1000/2-((secret_word.length*widthLineWord)-widthLineWord)/2;
+
+                drawLetters(calcMiddle+(widthLineWord*i),y,charConverted,widthLineWord-rest);
                 contWritedLetters++;//se contara la letra cuantas veces sea dibujado
                 // console.log(contWritedLetters);
                 if(secret_word.length==contWritedLetters){
@@ -160,14 +209,28 @@ function funcTT(e){
     
     if(charConverted!=null && !secret_word.includes(charConverted) && !arrFails.includes(charConverted)){
         arrFails.push(charConverted);
-        // console.log(arrFails);
         brush.clearRect(100,360,800,35);
+        // console.log(arrFails);
         // DIBUJAMOS LAS LETRAS ERRADAS QUE NO SE REPITEN
         for(let i = 0; i<arrFails.length; i++){
+            let fontS=20;
             let widthLineFails = 40;
+
+            if (winWidth>=768 && winWidth<=992 ){
+                widthLineFails = 33;
+                fontS = 17
+                // y = 
+            }else if( winWidth>=576 && winWidth <= 768){
+                widthLineFails = 24;
+                fontS = 15
+            }else if(winWidth <=576){
+                widthLineFails = 29;
+                fontS = 14
+            }
+            // console.log(fontS);
             calcMiddleFails = 1000/2-(arrFails.length*widthLineFails)/2;
             calcMiddleFails = calcMiddleFails + widthLineFails;
-            drawLetters(calcMiddleFails+(widthLineFails*i)-widthLineFails,390,arrFails[i],20);
+            drawLetters(calcMiddleFails+(widthLineFails*i)-widthLineFails,390,arrFails[i],fontS);
         }
         // HACEMOS QUE AVANCE EL DIBUJO DEL AHORCADO
         if(arrFails.length == 1){
@@ -223,3 +286,6 @@ drawSpaceWord();
 menu_start_game.addEventListener("keydown",funcTT);
 button_start_game.addEventListener("click", restart);
 btn_new_game.addEventListener("click", restart);
+window.addEventListener("resize", getWinWidth);
+window.addEventListener("load", getWinWidth);
+window.addEventListener("resize", restart);
