@@ -1,12 +1,15 @@
 .main-ahorcado{
-    height: 89vh;
+    display: flex;
     align-items: center;
     justify-content: center;
+    
+    height: 89vh;
     overflow: hidden;
 }
 /* ************* PRIMER MENU - BTN SELECION DE CASILLAS***********/
 .buttons-add-start{
     display: auto;
+    /* align-items: center; */
 }
 .button-start-game,.button-add-words{
     display: block;
