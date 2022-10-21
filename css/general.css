@@ -44,8 +44,6 @@ body{
     border-radius: 24px;
 }
 
-
-
 /* **************CABECERA DEL PROYECTO************ */
 header nav{
     display: flex;
@@ -131,7 +129,7 @@ nav .material-symbols-outlined.button{
         align-items: center;
         /* justify-content: center; */
         position: fixed;
-        right: -300px;
+        right: -400px;
         top: 0;
         z-index: 10;
 
